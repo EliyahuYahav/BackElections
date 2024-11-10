@@ -1,11 +1,11 @@
 import express, { Application } from "express";
-import userRouter from './routes/userRouter.js'
+import userRouter from './routes/userRouter'
 // import actionRoute from './routes/actionRoute.js'
-import connectDb from "./config/db.js";
+import connectDb from "./config/db";
 import dotenv from "dotenv";
 import cp from "cookie-parser";
 // import { authMiddleware } from "./middleware/authMiddleware.js";
-import swaggerUi from 'swagger-ui-express'
+// import swaggerUi from 'swagger-ui-express'
 // import {swaggerSpec} from './swagger.js'
 
 dotenv.config();
