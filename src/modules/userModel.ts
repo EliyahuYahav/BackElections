@@ -12,7 +12,7 @@ const UserSchema:Schema = new mongoose.Schema({
 export interface Users {
   username: string;
   password: string;
-  isAdmin: Boolean;
+  isAdmin?: Boolean;
   hasVoted?: Boolean;
   votedFor: string | null;
   _id?: string;

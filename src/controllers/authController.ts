@@ -57,7 +57,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const GetAllCandidates = async (req: Request, res: Response): Promise<void> => {
   try {
     const allUsers = await AllCandidates() 
-    res.status(200).json({ data: allUsers, success: true });
+    res.status(200).json(allUsers);
 } catch (error) {
     res.status(400).json({ message: "you have a problem to get all users" });
 }

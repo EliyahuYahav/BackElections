@@ -1,12 +1,9 @@
 import express, { Application } from "express";
 import userRouter from './routes/userRouter'
-// import actionRoute from './routes/actionRoute.js'
 import connectDb from "./config/db";
 import dotenv from "dotenv";
 import cp from "cookie-parser";
-// import { authMiddleware } from "./middleware/authMiddleware.js";
-// import swaggerUi from 'swagger-ui-express'
-// import {swaggerSpec} from './swagger.js'
+import cors from "cors"
 
 dotenv.config();
 
@@ -17,32 +14,9 @@ connectDb();
 
 app.use(express.json());
 app.use(cp());
+app.use(cors())
 
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use('/api', userRouter)
 
 app.listen(PORT, ()=>{console.log(`server listen on port ${PORT}.`)})
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:4000",
-//   },
-// });
-
-
-// io.on("connection", (socket) => {
-//   console.log("User is Connected!!!");
-
-//   socket.on("chat message", (data) => {
-//     socket.broadcast.emit("chat message", data);
-//   });
-
-//   socket.on("typing", () => {
-//     socket.broadcast.emit("typing", "typing...");
-//   });
-// });
-
-// io.on("disconnect", () => {
-//   console.log("User disconnected");
-// });
-
