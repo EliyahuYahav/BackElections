@@ -9,12 +9,12 @@ const UserSchema:Schema = new mongoose.Schema({
   votedFor: {  type: Types.ObjectId, ref: 'Candidate'}
 });
 
-export interface User {
+export interface Users {
   username: string;
   password: string;
   isAdmin: Boolean;
   hasVoted?: Boolean;
-  votedFor: string;
+  votedFor: string | null;
   _id?: string;
 }
 

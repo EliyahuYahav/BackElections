@@ -1,7 +1,7 @@
 import express, { Application, Router } from "express";
 import { login, register } from "../controllers/authController";
 
-const app: Application = express();
+
 const router: Router = express.Router();
 
 router.route('/register').post(register);

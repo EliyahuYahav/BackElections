@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { User } from "../modules/userModel";
+import { Users } from "../modules/userModel";
 import { authenticateUser, registerUser } from "../services/userService";
 
 dotenv.config();
@@ -10,20 +10,15 @@ const JWT_SECRET: string = process.env.JWT_SECRET || "default_secret";
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    console.log("seconde")
-    const user: User = req.body;
+    const user: Users = req.body;
     if (!user.username || !user.password) {
       res.status(400).json({ error: "Username and password are required." });
       return;
     }
     const newUser = await registerUser(user);
-    console.log(newUser);
+    res.status(201).json({user: newUser})
   } catch (error) {
-    if (error === "Username already exists.") {
-      res.status(409).json({ error: error });
-    } else {
-      res.status(500).json({ error: "Internal server error." });
-    }
+    res.status(409).json({ error: error });
   }
 };
 
@@ -34,7 +29,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ error: "Username and password are required." });
       return;
     }
-    const user: User | null = await authenticateUser(username, password);
+    const user: Users | null = await authenticateUser(username, password);
     if (user) {
       const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, {
         expiresIn: "1h",

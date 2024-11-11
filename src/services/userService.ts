@@ -1,20 +1,23 @@
-import Users, { User } from "../modules/userModel";
+import User, { Users } from "../modules/userModel";
 import bcrypt from 'bcrypt';
 
-export const registerUser = async (user: User): Promise<User | void> => {
+export const registerUser = async (user: Users): Promise<Users | void> => {
   try {
     const passwordHash = await bcrypt.hash(user.password.toString(), 10);
     user.password = passwordHash
-    await Users.create(user);
+    user.isAdmin = true
+    user.hasVoted = false
+    user.votedFor = null
+    await User.create(user);
     return user;
   } catch (error) {
     throw error;
   };
 };
 
-export const authenticateUser = async (username: string, password: string): Promise<User | null> => {
+export const authenticateUser = async (username: string, password: string): Promise<Users | null> => {
  try {
-   const user: User | null = await Users.findOne({username: username})
+   const user: Users | null = await User.findOne({username: username})
    if (user && await bcrypt.compare(password.toString(), user.password)) {
      return user;
    }
@@ -23,3 +26,4 @@ export const authenticateUser = async (username: string, password: string): Prom
    throw error;
  }
 };
+

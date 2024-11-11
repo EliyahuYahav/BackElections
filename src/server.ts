@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cp());
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.use('/api ', userRouter)
+app.use('/api', userRouter)
 // app.use('/users', authMiddleware, actionRoute)
 
 app.listen(PORT, ()=>{console.log(`server listen on port ${PORT}.`)})
