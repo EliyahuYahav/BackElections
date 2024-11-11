@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { Users } from "../modules/userModel";
-import { authenticateUser, registerUser } from "../services/userService";
+import { AllCandidates, authenticateUser, registerUser } from "../services/userService";
 
 dotenv.config();
 
@@ -53,3 +53,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       }
   }
 };
+
+
+export const GetAllCandidates = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const allUsers = await AllCandidates() 
+    res.status(200).json({ data: allUsers, success: true });
+} catch (error) {
+    res.status(400).json({ message: "you have a problem to get all users" });
+}
+}
