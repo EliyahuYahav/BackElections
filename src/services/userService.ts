@@ -1,5 +1,5 @@
 import User, { Users } from "../modules/userModel";
-import Candidate from "../modules/CandidateModel";
+import Candidate, { ICandidate } from "../modules/CandidateModel";
 import bcrypt from 'bcrypt';
 
 export const registerUser = async (user: Users): Promise<Users | void> => {
@@ -27,9 +27,15 @@ export const authenticateUser = async (username: string, password: string): Prom
  }
 };
 
+export const AllCandidates = async (): Promise<ICandidate[] | void> => {
+  const allUsers: ICandidate[]| null = await Candidate.find();
+  if (allUsers) {
+      return allUsers
+  }else throw Error
+}
 
-export const AllCandidates = async (): Promise<Users[] | void> => {
-  const allUsers: Users[]| null = await Candidate.find();
+export const AllUsers = async (): Promise<Users[] | void> => {
+  const allUsers: Users[]| null = await User.find();
   if (allUsers) {
       return allUsers
   }else throw Error

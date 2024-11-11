@@ -7,7 +7,7 @@ const CandidateSchema:Schema = new mongoose.Schema({
     votes: {type : Number}
   });
   
-  export interface Candidate {
+  export interface ICandidate {
     name: string,
     image: string,
     votes:number
