@@ -17,7 +17,7 @@ export const GetAllCandidates = async ( req: Request, res: Response): Promise<vo
 
 export const updateVote = async ( req: Request, res: Response): Promise<void> => {
     try {
-        const user = await UpdateVoteUserAndCandidates(req.params.id, req.body)
+        const user = await UpdateVoteUserAndCandidates(req.params.id, req.params.candidates)
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ message: "you have a problem to update your Vote" });
@@ -26,7 +26,7 @@ export const updateVote = async ( req: Request, res: Response): Promise<void> =>
 
 export const removeVote = async ( req: Request, res: Response): Promise<void> => {
     try {
-        const user = await removeVoteUserAndCandidates(req.params.id, req.body)
+        const user = await removeVoteUserAndCandidates(req.params.id, req.params.candidates)
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ message: "you have a problem to update your Vote" });

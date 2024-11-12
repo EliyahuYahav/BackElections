@@ -40,7 +40,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         maxAge: 3600000,
         sameSite: "strict",
       });
-      res.json({ token });
+      res.json({ token, user });
     } else {
       res.status(401).json({ message: "Authentication failed" });
     }

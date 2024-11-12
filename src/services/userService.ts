@@ -45,8 +45,8 @@ export const AllUsers = async (): Promise<Users[] | void> => {
 export const UpdateVoteUserAndCandidates = async (idUser: string, idCandidates:string)=>{
   const oneCandidate: ICandidate | null = await Candidate.findByIdAndUpdate(idCandidates, {$inc: { votes: 1 }, trim: true} );
   if(oneCandidate){
-    const correctUser: Users| null = await User.findByIdAndUpdate(idUser, {votedFor: oneCandidate._id, trim: true});
-    return correctUser
+    await User.findByIdAndUpdate(idUser, {votedFor: oneCandidate._id, trim: true});
+    return oneCandidate
   }
 }
 

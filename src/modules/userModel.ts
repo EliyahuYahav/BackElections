@@ -15,7 +15,7 @@ export interface Users {
   isAdmin?: Boolean;
   hasVoted?: Boolean;
   votedFor: string | null;
-  _id?: string;
+  _id?: Types.ObjectId;
 }
 
 export default mongoose.model("User", UserSchema);
