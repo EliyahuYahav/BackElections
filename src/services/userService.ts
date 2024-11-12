@@ -28,9 +28,9 @@ export const authenticateUser = async (username: string, password: string): Prom
 };
 
 export const AllCandidates = async (): Promise<ICandidate[] | void> => {
-  const allUsers: ICandidate[]| null = await Candidate.find();
-  if (allUsers) {
-      return allUsers
+  const allCandidate: ICandidate[]| null = await Candidate.find();
+  if (allCandidate) {
+      return allCandidate
   }else throw Error
 }
 
@@ -39,4 +39,21 @@ export const AllUsers = async (): Promise<Users[] | void> => {
   if (allUsers) {
       return allUsers
   }else throw Error
+}
+
+
+export const UpdateVoteUserAndCandidates = async (idUser: string, idCandidates:string)=>{
+  const oneCandidate: ICandidate | null = await Candidate.findByIdAndUpdate(idCandidates, {$inc: { votes: 1 }, trim: true} );
+  if(oneCandidate){
+    const correctUser: Users| null = await User.findByIdAndUpdate(idUser, {votedFor: oneCandidate._id, trim: true});
+    return correctUser
+  }
+}
+
+export const removeVoteUserAndCandidates = async (idUser: string, idCandidates:string)=>{
+  const oneCandidate: ICandidate | null = await Candidate.findByIdAndUpdate({idCandidates, votes: { "$gt": 0 } },{ $inc: { votes: -1 } });
+  if(oneCandidate){
+    const correctUser: Users| null = await User.findByIdAndUpdate(idUser, {votedFor: null, trim: true});
+    return correctUser
+  }
 }

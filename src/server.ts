@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import userRouter from './routes/userRouter'
+import candidatesRouter from './routes/candidatesRouter'
 import connectDb from "./config/db";
 import dotenv from "dotenv";
 import cp from "cookie-parser";
@@ -18,5 +19,6 @@ app.use(cors())
 
 
 app.use('/api', userRouter)
+app.use('/api', candidatesRouter)
 
 app.listen(PORT, ()=>{console.log(`server listen on port ${PORT}.`)})

@@ -11,6 +11,7 @@ const CandidateSchema:Schema = new mongoose.Schema({
     name: string,
     image: string,
     votes:number
+    _id?:string
   }
   
   export default mongoose.model("Candidate", CandidateSchema);
